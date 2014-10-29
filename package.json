@@ -1,0 +1,17 @@
+{
+  "name": "Jammer",
+  "version": "0.0.1",
+  "description": "Lightweight game server for getting up to speed in your game jam",
+  "author": "Jeremy Tuloup",
+  "keywords": [
+    "game",
+    "jam",
+    "multiplayer"
+  ],
+  "dependencies": {
+    "express": "^4.10.1",
+    "socket.io": "^1.2.0",
+    "yargs": "^1.3.2"
+  },
+  "license": "MIT"
+}
