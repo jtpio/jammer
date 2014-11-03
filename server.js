@@ -58,14 +58,22 @@ var handlePlayer = function (player) {
         player.gameSession = gameSession;
         player.id = g.count++;
         g.players[player.id] = player;
-        g.ws.emit('join', player.id);
+        g.ws.emit('addPlayer', player.id);
 
     });
 
     player.on('disconnect', function () {
         if (player.gameSession) {
-            // TODO send disconnect event
-            delete games[player.gameSession];
+            var g = games[player.gameSession];
+            g.ws.emit('removePlayer', { 'playerID': player.id });
+            delete g.players[player.id];
+        }
+    });
+
+    player.on('update', function (msg) {
+        if (player.gameSession && games[player.gameSession]) {
+            msg.playerID = player.id;
+            games[player.gameSession].ws.emit('updatePlayer', msg);
         }
     });
 };
