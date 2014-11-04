@@ -17,7 +17,7 @@ var used = [];
 var games = {};
 
 function handleGame (game) {
-  var gameID = used.length > 0 ? used.shift() : ++gameCounter;
+  var gameID = used.shift() || ++gameCounter;
   var g = games[gameID] = {
     'id': gameID,
     'ws': game,
