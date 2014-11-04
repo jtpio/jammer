@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title></title>
+    <meta content="">
+    <style></style>
+  </head>
+  <body>
+    <script src="//cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="js/gameClient.js"></script>
+  	<script type="text/javascript">
+
+  	var gameClient = new GameClient();
+
+  	// join the game number 3
+  	// gameClient.join(3);
+
+  	gameClient.addEventListener('changeColor', function (color) {
+  		console.log('Changing color of the background to ' + color);
+  		document.body.style.background = color;
+  	});
+
+  	</script>
+
+  </body>
+</html>

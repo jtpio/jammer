@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title></title>
+    <meta content="">
+    <style></style>
+  </head>
+  <body>
+    <script src="//cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="js/gameServer.js"></script>
+    <script type="text/javascript">
+
+      var gameServer = new GameServer();
+      var players = {};
+
+      gameServer.addEventListener('gameID', function (gameID) {
+        console.log('The game got the gameID ' + gameID + ', display it to your players');
+      });
+
+      gameServer.addEventListener('newPlayer', function (player) {
+        players[player.id] = player;
+        console.log('Player ' + player.id + ' connected');
+      });
+
+      function changePlayerColor (playerID, color) {
+        players[playerID].sendCmd('changeColor', color);
+      }
+
+    </script>
+
+  </body>
+</html>
