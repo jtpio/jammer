@@ -1,6 +1,6 @@
-# Jammer, a server for your game jams
+# Jammer - A server for your game jam
 
-Jammer is a ready to use game server made to speed up game creation in the context of game jams.
+Jammer is a ready to use game server made to speed up game creation in the context of game jams, focused on web based games.
 
 ## Motivation
 A game jam is all about making a great game fast, so you shouldn't spend to much time in repetitive tasks.
