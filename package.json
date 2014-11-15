@@ -15,5 +15,6 @@
     "jammer": "./bin/jammer.js"
   },
   "preferGlobal": true,
-  "license": "MIT"
+  "license": "MIT",
+  "repository": "jtpio/jammer"
 }
