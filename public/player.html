@@ -2,22 +2,56 @@
   <head>
     <title></title>
     <meta content="">
-    <style></style>
+    <style>
+
+      #changeSize {
+        position: absolute;
+        top: 25%;
+        left: 25%;
+        width: 50%;
+        height: 50%;
+        font-size: 4em;
+      }
+
+      #changeSize {
+        display: none;
+      }
+
+    </style>
   </head>
   <body>
+
+    <div id="inputArea">
+      <input id="gameID" type="text"> <button onclick="join()"> Join </button>
+    </div>
+
+    <button id="changeSize" onclick="changeSize()"> Morph! </button>
+
     <script src="//cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="js/gameClient.js"></script>
   	<script type="text/javascript">
 
+    var inputArea = document.getElementById('inputArea');
+    var input = document.getElementById('gameID');
+    var size = document.getElementById('changeSize');
   	var gameClient = new GameClient();
 
-  	// join the game number 3
-  	// gameClient.join(3);
+    function join () {
+      gameClient.join(input.value);
+    }
 
-  	gameClient.addEventListener('changeColor', function (color) {
-  		console.log('Changing color of the background to ' + color);
-  		document.body.style.background = color;
-  	});
+    function changeSize () {
+      gameClient.sendCmd('changeSize', Math.random() * 100 + 100);
+    }
+
+    gameClient.addEventListener('changeColor', function (color) {
+      document.body.style.background = color;
+    });
+
+    gameClient.addEventListener('joined', function () {
+      inputArea.style.display = 'none';
+      size.style.display = "inline";
+    });
 
   	</script>
 

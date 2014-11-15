@@ -5,10 +5,51 @@
     <style></style>
   </head>
   <body>
+
+    <canvas id="game"></canvas>
+
     <script src="//cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="js/gameServer.js"></script>
     <script type="text/javascript">
 
+      // Rendering
+      var canvas = document.getElementById('game');
+      var ctx = canvas.getContext('2d');
+      var W = canvas.width = window.innerWidth;
+      var H = canvas.height = window.innerHeight;
+      var MARGIN = 100;
+
+      function drawCircle (x, y, radius, color) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.fillStyle = color;
+        ctx.arc(x, y, radius, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function render () {
+        ctx.clearRect(0, 0, W, H);
+        ctx.fillStyle = '#CCE0E3';
+        ctx.fillRect(0, 0, W, H);
+        for (var p in players) {
+          drawCircle(players[p].x, players[p].y, players[p].radius, players[p].color);
+        }
+        requestAnimationFrame(render);
+      }
+
+      requestAnimationFrame(render);
+
+      function randomColor() {
+        var alphabet = '0123456789abcdef';
+        var res = '#';
+        for (var i = 0; i < 6; i++ ) {
+          res += alphabet[Math.floor(Math.random() * alphabet.length)];
+        }
+        return res;
+      }
+
+      // Networking
       var gameServer = new GameServer();
       var players = {};
 
@@ -16,9 +57,22 @@
         console.log('The game got the gameID ' + gameID + ', display it to your players');
       });
 
+      // Define all the player events here
       gameServer.addEventListener('newPlayer', function (player) {
         players[player.id] = player;
+        player.x = MARGIN + Math.random() * (W-MARGIN);
+        player.y = MARGIN + Math.random() * (H-MARGIN);
+        player.radius = 50;
+        player.color = randomColor();
+
         console.log('Player ' + player.id + ' connected');
+        changePlayerColor(player.id, player.color);
+
+        // example of a player event: changeSize
+        player.addEventListener('changeSize', function (size) {
+          player.radius = size || 50;
+        });
+
       });
 
       function changePlayerColor (playerID, color) {

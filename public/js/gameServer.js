@@ -105,7 +105,7 @@ PlayerConnection.prototype.sendEvent = function(type, args) {
   if (fn) {
     fn.apply(this, args);
   } else {
-    console.error('Unknown Event: ' + type);
+    console.info('Unknown Event: ' + type);
   }
 };
 

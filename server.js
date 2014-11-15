@@ -57,11 +57,16 @@ function handlePlayer (player) {
     }
 
     var g = games[gameID];
+    if (player.gameID === gameID) {
+      // player is already in this game
+      return;
+    }
+
     player.gameID = gameID;
     player.id = g.count++;
     g.players[player.id] = player;
     g.ws.emit('addPlayer', { 'playerID': player.id });
-
+    player.emit('message', { 'cmd': 'joined'});
   });
 
   player.on('disconnect', function () {
@@ -79,7 +84,6 @@ function handlePlayer (player) {
   });
 
 };
-
 
 // Handle all the connections
 io.on('connection', function (socket) {
