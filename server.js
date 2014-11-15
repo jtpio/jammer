@@ -57,8 +57,8 @@ function handlePlayer (player) {
     }
 
     var g = games[gameID];
-    if (player.gameID === gameID) {
-      // player is already in this game
+    if (player.hasOwnProperty('gameID')) {
+      // player is already in a game
       return;
     }
 

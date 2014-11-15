@@ -1,7 +1,7 @@
 {
-  "name": "Jammer",
+  "name": "jammer",
   "version": "0.0.1",
-  "description": "Lightweight game server for getting up to speed in your game jam",
+  "description": "Lightweight game server for getting up to speed during your game jam",
   "author": "Jeremy Tuloup",
   "keywords": [
     "game",
@@ -13,5 +13,10 @@
     "socket.io": "^1.2.0",
     "yargs": "^1.3.2"
   },
+  "main": "bin/jammer",
+  "bin": {
+    "jammer": "./bin/jammer.js"
+  },
+  "preferGlobal": true,
   "license": "MIT"
 }
