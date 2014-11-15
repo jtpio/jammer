@@ -1,9 +1,8 @@
 <html>
   <head>
-    <title></title>
+    <title>Player example</title>
     <meta content="">
     <style>
-
       #changeSize {
         position: absolute;
         top: 25%;
@@ -16,19 +15,22 @@
       #changeSize {
         display: none;
       }
-
     </style>
   </head>
   <body>
 
+    <!-- HTML elements for example -->
     <div id="inputArea">
       <input id="gameID" type="text"> <button onclick="join()"> Join </button>
     </div>
 
     <button id="changeSize" onclick="changeSize()"> Morph! </button>
 
+    <!-- socket.io required, keep these two lines before your game scripts -->
     <script src="//cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="js/gameClient.js"></script>
+
+    <!-- Script for the example -->
   	<script type="text/javascript">
 
     var inputArea = document.getElementById('inputArea');

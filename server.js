@@ -48,7 +48,7 @@ function handleGame (game) {
 
   game.emit('gameID', gameID);
 
-};
+}
 
 function handlePlayer (player) {
   player.on('join', function (gameID) {
@@ -83,7 +83,7 @@ function handlePlayer (player) {
     }
   });
 
-};
+}
 
 // Handle all the connections
 io.on('connection', function (socket) {

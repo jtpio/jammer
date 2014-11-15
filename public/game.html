@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title></title>
+    <title>Game example</title>
     <meta content="">
     <style>
       #gameID {
@@ -15,11 +15,14 @@
   </head>
   <body>
 
+    <!-- HTML elements for the example -->
     <div id="gameID"></div>
     <canvas id="game"></canvas>
 
     <script src="//cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="js/gameServer.js"></script>
+
+    <!-- Script for the example example -->
     <script type="text/javascript">
 
       // Rendering
@@ -83,6 +86,10 @@
         // example of a player event: changeSize
         player.addEventListener('changeSize', function (size) {
           player.radius = size || 50;
+        });
+
+        player.addEventListener('disconnect', function () {
+          delete players[player.id];
         });
 
       });
