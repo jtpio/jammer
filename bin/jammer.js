@@ -2,6 +2,7 @@
 
 var path = require('path');
 var fs = require('fs');
+var spawn = require('child_process').spawn;
 
 var destination = '.';
 
@@ -10,8 +11,7 @@ var files = [
 	'public/player.html',
 	'public/js/gameClient.js',
 	'public/js/gameServer.js',
-	'server.js',
-	'package.json'
+	'server.js'
 ];
 
 fs.mkdirSync(destination + '/public');
@@ -23,3 +23,9 @@ var inputFiles = files.map(function (file) {
 	fs.writeFileSync(path.resolve(destination, file), str);
 });
 
+// copy package.json
+var str = fs.readFileSync(path.resolve(__dirname, '../package_jammer.json'));
+console.log('Creating package.json');
+fs.writeFileSync(path.resolve(destination, 'package.json'), str);
+
+spawn('npm', ['install']);

@@ -2,10 +2,20 @@
   <head>
     <title></title>
     <meta content="">
-    <style></style>
+    <style>
+      #gameID {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: black;
+        z-index: 10;
+        font-size: 32px;
+      }
+    </style>
   </head>
   <body>
 
+    <div id="gameID"></div>
     <canvas id="game"></canvas>
 
     <script src="//cdn.socket.io/socket.io-1.2.0.js"></script>
@@ -13,6 +23,7 @@
     <script type="text/javascript">
 
       // Rendering
+      var gameDiv = document.getElementById('gameID');
       var canvas = document.getElementById('game');
       var ctx = canvas.getContext('2d');
       var W = canvas.width = window.innerWidth;
@@ -55,6 +66,7 @@
 
       gameServer.addEventListener('gameID', function (gameID) {
         console.log('The game got the gameID ' + gameID + ', display it to your players');
+        gameDiv.innerHTML = gameID;
       });
 
       // Define all the player events here
