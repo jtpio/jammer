@@ -96,5 +96,5 @@ io.on('connection', function (socket) {
 });
 
 http.listen(argv.p, function(){
-  console.log('listening on port', argv.p);
+  console.log('Server listening on port', argv.p);
 });

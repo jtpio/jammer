@@ -28,4 +28,9 @@ var str = fs.readFileSync(path.resolve(__dirname, '../package_jammer.json'));
 console.log('Creating package.json');
 fs.writeFileSync(path.resolve(destination, 'package.json'), str);
 
-spawn('npm', ['install']);
+console.log('Installing node modules ... ');
+var nodeModules = spawn('npm', ['install']);
+
+nodeModules.on('close', function (code) {
+  console.log('...done');
+});
