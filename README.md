@@ -1,14 +1,17 @@
 # Jammer - A server for your game jam
 
-Jammer is a ready to use game server to speed up game creation in the context of game jams, for **web based** games.
+Jammer is a ready to use game server to speed up game creation in the context of game jams.
 
+It is written in Javascript so it focuses on **web based** games.
+
+It is designed for games involving multiple players playing simultaneously on the same screen. 
 
 ## Install
+Install node.js, then:
+
     npm install jammer -g
     
 ## Usage
-Run:
-
     jammer
 
 This will generate all the files you need in the current working directory and run *npm install* automatically: 
@@ -35,8 +38,72 @@ To generate the files at a specific path:
     jammer /path/to/destination/
 
 ## Documentation
+## Examples
+The generated files include an example showing the basics.
 
+```
+public/player.html
+public/game.html
+```
 
+They include or the Javascript files:
+```
+public/js/gameClient.js
+public/js/gameServer.js
+```
+
+### GameServer
+
+```
+var gameServer = new GameServer();
+var players = {};
+gameServer.addEventListener('gameID', function (gameID) {
+    // display the game ID on screen for the players
+});
+
+gameServer.addEventListener('newPlayer', function (player) {
+    // player connected
+    var playerID = player.id;
+    players[playerID] = player; // save it for later use
+    player.x = Math.random() * 500;
+    player.y = Math.random() * 500;
+    player.size = 50;
+
+    // Player listeners
+    // Example of a player event: changeSize
+    player.addEventListener('changeSize', function (size) {
+        player.size = size || 50;
+    });
+    
+    // Send command to the player
+    player.sendCmd('changeColor', '#FF0000');
+});
+
+player.addEventListener('disconnect', function () {
+    delete players[player.id];
+});
+```
+
+### GameClient
+
+```
+var gameClient = new GameClient();
+gameClient.join(12); // join the game 12
+
+gameClient.addEventListener('joined', function () {
+    // player joined, do something with it, for example change the size
+    gameClient.sendCmd('changeSize', Math.random() * 100 + 100);
+});
+
+gameClient.addEventListener('changeColor', function (color) {
+  // change the color of the player
+});
+```
+
+## List of events
+### GameServer
+
+### GameClient
 
 ## Motivation
 A game jam is all about making a great game fast, so you shouldn't spend to much time in repetitive and time consuming tasks.
