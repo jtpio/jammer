@@ -54,7 +54,7 @@ public/js/gameServer.js
 
 ### GameServer
 
-```
+``` js
 var gameServer = new GameServer();
 var players = {};
 gameServer.addEventListener('gameID', function (gameID) {
@@ -86,7 +86,7 @@ player.addEventListener('disconnect', function () {
 
 ### GameClient
 
-```
+``` js
 var gameClient = new GameClient();
 gameClient.join(12); // join the game 12
 

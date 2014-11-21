@@ -4,7 +4,7 @@ var path = require('path');
 var fs = require('fs');
 var spawn = require('child_process').spawn;
 
-var destination = '.';
+var destination = process.argv[2] || '.';
 
 var files = [
 	'public/game.html',
@@ -29,6 +29,7 @@ console.log('Creating package.json');
 fs.writeFileSync(path.resolve(destination, 'package.json'), str);
 
 console.log('Installing node modules ... ');
+process.chdir(destination);
 var nodeModules = spawn('npm', ['install']);
 
 nodeModules.on('close', function (code) {
