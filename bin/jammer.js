@@ -14,8 +14,13 @@ var files = [
 	'server.js'
 ];
 
-fs.mkdirSync(destination + '/public');
-fs.mkdirSync(destination + '/public/js');
+if (!fs.existsSync(destination + '/public')) {
+	fs.mkdirSync(destination + '/public');
+}
+
+if (!fs.existsSync(destination + '/public/js')) {
+	fs.mkdirSync(destination + '/public/js');
+}
 
 var inputFiles = files.map(function (file) {
 	var str = fs.readFileSync(path.resolve(__dirname, '../' + file));
