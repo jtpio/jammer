@@ -9,9 +9,9 @@
   var players = {};
 
   // Handlers
-  function gameID (gameID) {
-    sendEvent('gameID', [gameID]);
-  };
+  function gameID (id) {
+    sendEvent('id', [id]);
+  }
 
   function addPlayer (msg) {
     var id = msg.playerID;
@@ -19,7 +19,7 @@
 
     players[id] = new PlayerConnection(id);
     sendEvent('newPlayer', [players[id]]);
-  };
+  }
 
   function removePlayer  (msg) {
     var id = msg.playerID;
@@ -28,14 +28,14 @@
 
     player.sendEvent('disconnect', []);
     delete players[id];
-  };
+  }
 
   function updatePlayer (msg) {
     var player = players[msg.playerID];
     if (!player) return;
 
     player.sendEvent(msg.cmd, [msg.data]);
-  };
+  }
 
   // Constructor
   var GameServer = function () {
@@ -58,15 +58,6 @@
     sendEvent('disconnect');
     for (var p in players) {
       removePlayer(p);
-    }
-  };
-
-  var onMessage = function (type, msg) {
-    var handler = handlers[type];
-    if (handler) {
-      handler(msg);
-    } else {
-      console.error('Unknown message: ', type, msg);
     }
   };
 
