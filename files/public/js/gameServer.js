@@ -10,7 +10,7 @@
 
   // Handlers
   function gameID (id) {
-    sendEvent('id', [id]);
+    sendEvent('gameID', [id]);
   }
 
   function addPlayer (msg) {

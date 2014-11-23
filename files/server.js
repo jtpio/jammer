@@ -17,7 +17,10 @@ var used = [];
 var games = {};
 
 function handleGame (game) {
-  var gameID = used.shift() || ++gameCounter;
+  var gameID = used.shift();
+  if (!gameID || games[gameID]) {
+    gameID = ++gameCounter;
+  }
   game.gameID = gameID;
   game.count = 0;
   game.players = {};
@@ -44,7 +47,6 @@ function handleGame (game) {
   });
 
   games[gameID] = game;
-
   game.emit('gameID', gameID);
 }
 
