@@ -4,7 +4,7 @@ Jammer is a ready to use game server to speed up game creation in the context of
 
 It is written in Javascript so it focuses on **web based** games.
 
-It is designed for games involving multiple players playing simultaneously on the same screen. 
+It is designed for games with multiple players playing simultaneously on the same screen. 
 
 ## Install
 Install node.js, then:
