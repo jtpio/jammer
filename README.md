@@ -77,10 +77,10 @@ gameServer.addEventListener('newPlayer', function (player) {
     
     // Send command to the player
     player.sendCmd('changeColor', '#FF0000');
-});
-
-player.addEventListener('disconnect', function () {
-    delete players[player.id];
+   
+    player.addEventListener('disconnect', function () {
+        delete players[player.id];
+    });
 });
 ```
 
@@ -100,10 +100,35 @@ gameClient.addEventListener('changeColor', function (color) {
 });
 ```
 
-## List of events
-### GameServer
+## List of defaults events and actions
+### On the game side
+``` js
+gameServer.addEventListener('gameID', function (gameID) {
+    // Do something here to display the game ID on the screen for the players
+});
+gameServer.addEventListener('newPlayer', function (player) {
+    // A new player just joined, do something with the player object, store it for later use
+    
+    // Default events for the player
+    player.addEventListener('disconnect', function () {
+        // Player disconnected, do something with, remove it from the game for example
+    });
+});
+gameServer.addEventListener('disconnect', function (player) {
+    // The game disconnected, could be due to network problems, display something to the players or die silently
+});
+```
 
-### GameClient
+### On the player side
+```
+// join game number 2
+gameClient.join(2);
+
+gameClient.addEventListener('joined', function () {
+   // the player joined the game, display controller or anything else
+});
+```
+
 
 ## Motivation
 A game jam is all about making a great game fast, so you shouldn't spend to much time in repetitive and time consuming tasks.
