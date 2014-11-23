@@ -50,12 +50,15 @@
     if (callback) {
       callback.apply(callback, args);
     } else {
-      console.error('Unknown Event: ' + type);
+      console.info('Received event: ' + type + ', not handled');
     }
   }
 
   if (typeof define !== 'undefined' && define.amd) {
-    define(GameClient);
+    obj.GameClient = GameClient;
+    define(function() {
+      return GameClient;
+    });
   } else {
     obj.GameClient = GameClient;
   }

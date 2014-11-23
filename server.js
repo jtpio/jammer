@@ -50,6 +50,7 @@ function handleGame (game) {
 
 function handlePlayer (player) {
   player.on('join', function (gameID) {
+    gameID = parseInt(gameID, 10);
     if (!games[gameID]) {
       return player.emit('joined', { 'error': 'This game session does not exist' });
     }

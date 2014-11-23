@@ -105,7 +105,10 @@
   };
 
   if (typeof define !== 'undefined' && define.amd) {
-    define(GameServer);
+    obj.GameServer = GameServer;
+    define(function() {
+      return GameServer;
+    });
   } else {
     obj.GameServer = GameServer;
   }
