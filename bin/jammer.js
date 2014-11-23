@@ -11,7 +11,8 @@ var files = [
 	'public/player.html',
 	'public/js/gameClient.js',
 	'public/js/gameServer.js',
-	'server.js'
+	'server.js',
+	'package.json'
 ];
 
 if (!fs.existsSync(destination + '/public')) {
@@ -23,15 +24,10 @@ if (!fs.existsSync(destination + '/public/js')) {
 }
 
 var inputFiles = files.map(function (file) {
-	var str = fs.readFileSync(path.resolve(__dirname, '../' + file));
+	var str = fs.readFileSync(path.resolve(__dirname, '../files', file));
 	console.log('Creating ' + file);
 	fs.writeFileSync(path.resolve(destination, file), str);
 });
-
-// copy package.json
-var str = fs.readFileSync(path.resolve(__dirname, '../package_jammer.json'));
-console.log('Creating package.json');
-fs.writeFileSync(path.resolve(destination, 'package.json'), str);
 
 console.log('Installing node modules ... ');
 process.chdir(destination);
