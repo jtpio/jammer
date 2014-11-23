@@ -120,7 +120,7 @@ gameServer.addEventListener('disconnect', function (player) {
 ```
 
 ### On the player side
-```
+``` js
 // join game number 2
 gameClient.join(2);
 
