@@ -52,6 +52,8 @@ public/js/gameClient.js
 public/js/gameServer.js
 ```
 
+Another example with a bigger game: [TwinFusion](https://github.com/jtpio/twin-fusion)
+
 ### GameServer
 
 ``` js
