@@ -2,6 +2,7 @@
   <head>
     <title>Player example</title>
     <meta content="">
+    <meta name="viewport" content="width=device-width">
     <style>
       #changeSize {
         position: absolute;
@@ -43,7 +44,7 @@
     }
 
     function changeSize () {
-      gameClient.sendCmd('changeSize', Math.random() * 100 + 100);
+      gameClient.sendCommand('changeSize', Math.random() * 100 + 100);
     }
 
     gameClient.addEventListener('changeColor', function (color) {

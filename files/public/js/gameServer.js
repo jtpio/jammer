@@ -3,7 +3,6 @@
   'use strict';
 
   var obj = this;
-
   var net = null;
   var listeners = {};
   var players = {};
@@ -79,7 +78,7 @@
     this.handlers = {};
   };
 
-  PlayerConnection.prototype.sendCmd = function(cmd, data) {
+  PlayerConnection.prototype.sendCommand = function(cmd, data) {
     net.emit('updatePlayer', {'cmd': cmd, 'playerID': this.id, 'data': data || {}});
   };
 
