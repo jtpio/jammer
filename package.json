@@ -1,7 +1,7 @@
 {
   "name": "jammer",
   "version": "1.0.0",
-  "description": "Lightweight game server for getting up to speed during your game jam",
+  "description": "Minimalist game server to speed up your game jam",
   "author": "Jeremy Tuloup",
   "keywords": [
     "game",
@@ -16,5 +16,8 @@
   },
   "preferGlobal": true,
   "license": "MIT",
-  "repository": "jtpio/jammer"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jtpio/jammer.git"
+  }
 }
