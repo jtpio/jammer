@@ -8,8 +8,7 @@
     "jam",
     "multiplayer"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "main": "bin/jammer",
   "bin": {
     "jammer": "./bin/jammer.js"
@@ -19,5 +18,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/jtpio/jammer.git"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/jtpio/jammer/issues"
+  },
+  "homepage": "https://github.com/jtpio/jammer"
 }
