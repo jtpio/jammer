@@ -1,6 +1,6 @@
 # Jammer - A server for your game jam
 
-Jammer is a ready to use game server to speed up game creation in the context of game jams.
+Jammer is a ready-to-use game server to speed up game creation in the context of game jams.
 
 It is written in Javascript so it focuses on **web based** games.
 
@@ -81,7 +81,7 @@ gameServer.addEventListener('newPlayer', function (player) {
     });
     
     // Send command to the player
-    player.sendCmd('changeColor', '#FF0000');
+    player.sendCommand('changeColor', '#FF0000');
    
     player.addEventListener('disconnect', function () {
         delete players[player.id];
@@ -97,7 +97,7 @@ gameClient.join(12); // join the game 12
 
 gameClient.addEventListener('joined', function () {
     // player joined, do something with it, for example change the size
-    gameClient.sendCmd('changeSize', Math.random() * 100 + 100);
+    gameClient.sendCommand('changeSize', Math.random() * 100 + 100);
 });
 
 gameClient.addEventListener('changeColor', function (color) {
