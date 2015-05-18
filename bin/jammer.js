@@ -11,17 +11,23 @@ var files = [
 	'public/player.html',
 	'public/js/gameClient.js',
 	'public/js/gameServer.js',
+	'public/lib/socket.io-1.3.5.js',
 	'server.js',
 	'package.json'
 ];
 
-if (!fs.existsSync(destination + '/public')) {
-	fs.mkdirSync(destination + '/public');
-}
+var dirs = [
+	'public',
+	'public/js',
+	'public/lib'
+];
 
-if (!fs.existsSync(destination + '/public/js')) {
-	fs.mkdirSync(destination + '/public/js');
-}
+dirs.forEach(function (dir) {
+	console.log(path.resolve(destination, dir));
+	if (!fs.existsSync(path.resolve(destination, dir))) {
+		fs.mkdirSync(path.resolve(destination, dir));
+	}
+});
 
 var inputFiles = files.map(function (file) {
 	var str = fs.readFileSync(path.resolve(__dirname, '../files', file));
