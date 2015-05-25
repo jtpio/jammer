@@ -44,14 +44,14 @@
     }
 
     function changeSize () {
-      gameClient.sendCommand('changeSize', Math.random() * 100 + 100);
+      gameClient.send('changeSize', Math.random() * 100 + 100);
     }
 
-    gameClient.addEventListener('changeColor', function (color) {
+    gameClient.on('changeColor', function (color) {
       document.body.style.background = color;
     });
 
-    gameClient.addEventListener('joined', function () {
+    gameClient.on('joined', function () {
       inputArea.style.display = 'none';
       size.style.display = "inline";
     });

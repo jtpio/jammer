@@ -14,17 +14,22 @@
     net.on('error', console.error);
   };
 
-  GameClient.prototype.addEventListener = function (type, callback) {
+  GameClient.prototype.on = function (type, callback) {
     if (!listeners.hasOwnProperty(type)) {
       listeners[type] = callback;
     }
   };
 
-  GameClient.prototype.removeEventListener = function (type) {
-    listeners[type] = undefined;
+  // if type is not provided, remove all listeners
+  GameClient.prototype.off = function (type) {
+    if (type === undefined) {
+      listeners = {};
+    } else {
+      listeners[type] = undefined;
+    }
   };
 
-  GameClient.prototype.sendCommand = function (cmd, data) {
+  GameClient.prototype.send = function (cmd, data) {
     net.emit('update', {'cmd': cmd, 'data': data || {}});
   };
 

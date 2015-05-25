@@ -4,17 +4,17 @@ Jammer is a ready-to-use game server to speed up game creation in the context of
 
 It is written in Javascript so it focuses on **web based** games.
 
-It is designed for games with multiple players playing simultaneously on the same screen. 
+It is designed for games with multiple players playing simultaneously on the same screen.
 
 ## Install
 Install node.js, then:
 
     npm install jammer -g
-    
+
 ## Usage
     jammer
 
-This will generate all the files you need in the current working directory and run *npm install* automatically: 
+This will generate all the files you need in the current working directory and run *npm install* automatically:
 ```
 public/game.html
 public/player.html
@@ -26,7 +26,7 @@ node_modules/
 ```
 
 Then:
-    
+
     node server.js
 
 And you have a server listening on **port 4321**. To start the server listening on port 7890:
@@ -34,7 +34,7 @@ And you have a server listening on **port 4321**. To start the server listening 
     node server.js -p 7890
 
 To generate the files at a specific path:
-    
+
     jammer /path/to/destination/
 
 ## Documentation
@@ -55,18 +55,18 @@ public/js/gameServer.js
 There is a global depedency on socket.io, so make sure to include it (see example).
 
 
-Another example with a bigger game: [TwinFusion](https://github.com/jtpio/twin-fusion)
+Another example with a bigger game, but using a previous version (different API): [TwinFusion](https://github.com/jtpio/twin-fusion)
 
 ### GameServer
 
 ``` js
 var gameServer = new GameServer();
 var players = {};
-gameServer.addEventListener('gameID', function (gameID) {
+gameServer.on('gameID', function (gameID) {
     // display the game ID on screen for the players
 });
 
-gameServer.addEventListener('newPlayer', function (player) {
+gameServer.on('newPlayer', function (player) {
     // player connected
     var playerID = player.id;
     players[playerID] = player; // save it for later use
@@ -76,14 +76,14 @@ gameServer.addEventListener('newPlayer', function (player) {
 
     // Player listeners
     // Example of a player event: changeSize
-    player.addEventListener('changeSize', function (size) {
+    player.on('changeSize', function (size) {
         player.size = size || 50;
     });
-    
+
     // Send command to the player
-    player.sendCommand('changeColor', '#FF0000');
-   
-    player.addEventListener('disconnect', function () {
+    player.send('changeColor', '#FF0000');
+
+    player.on('disconnect', function () {
         delete players[player.id];
     });
 });
@@ -95,12 +95,12 @@ gameServer.addEventListener('newPlayer', function (player) {
 var gameClient = new GameClient();
 gameClient.join(12); // join the game 12
 
-gameClient.addEventListener('joined', function () {
+gameClient.on('joined', function () {
     // player joined, do something with it, for example change the size
-    gameClient.sendCommand('changeSize', Math.random() * 100 + 100);
+    gameClient.send('changeSize', Math.random() * 100 + 100);
 });
 
-gameClient.addEventListener('changeColor', function (color) {
+gameClient.on('changeColor', function (color) {
   // change the color of the player
 });
 ```
@@ -108,18 +108,18 @@ gameClient.addEventListener('changeColor', function (color) {
 ## List of defaults events and actions
 ### On the game side
 ``` js
-gameServer.addEventListener('gameID', function (gameID) {
+gameServer.on('gameID', function (gameID) {
     // Do something here to display the game ID on the screen for the players
 });
-gameServer.addEventListener('newPlayer', function (player) {
+gameServer.on('newPlayer', function (player) {
     // A new player just joined, do something with the player object, store it for later use
-    
+
     // Default events for the player
-    player.addEventListener('disconnect', function () {
+    player.on('disconnect', function () {
         // Player disconnected, do something with, remove it from the game for example
     });
 });
-gameServer.addEventListener('disconnect', function (player) {
+gameServer.on('disconnect', function (player) {
     // The game disconnected, could be due to network problems, display something to the players or die silently
 });
 ```
@@ -129,7 +129,7 @@ gameServer.addEventListener('disconnect', function (player) {
 // join game number 2
 gameClient.join(2);
 
-gameClient.addEventListener('joined', function () {
+gameClient.on('joined', function () {
    // the player joined the game, display controller or anything else
 });
 ```

@@ -67,13 +67,13 @@
       var gameServer = new GameServer();
       var players = {};
 
-      gameServer.addEventListener('gameID', function (gameID) {
+      gameServer.on('gameID', function (gameID) {
         console.log('The game got the gameID ' + gameID + ', display it to your players');
         gameDiv.innerHTML = gameID;
       });
 
       // Define all the player events here
-      gameServer.addEventListener('newPlayer', function (player) {
+      gameServer.on('newPlayer', function (player) {
         players[player.id] = player;
         player.x = MARGIN + Math.random() * (W-MARGIN);
         player.y = MARGIN + Math.random() * (H-MARGIN);
@@ -84,18 +84,20 @@
         changePlayerColor(player.id, player.color);
 
         // example of a player event: changeSize
-        player.addEventListener('changeSize', function (size) {
+        player.on('changeSize', function (size) {
           player.radius = size || 50;
         });
 
-        player.addEventListener('disconnect', function () {
+        player.on('disconnect', function () {
+          player.off();
           delete players[player.id];
+          console.log('Player ' + player.id + ' disconnected');
         });
 
       });
 
       function changePlayerColor (playerID, color) {
-        players[playerID].sendCommand('changeColor', color);
+        players[playerID].send('changeColor', color);
       }
 
     </script>

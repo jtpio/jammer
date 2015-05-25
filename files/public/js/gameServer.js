@@ -25,7 +25,7 @@
     var player = players[id];
     if (!player) return;
 
-    player.sendEvent('disconnect', []);
+    player.forward('disconnect', []);
     delete players[id];
   }
 
@@ -33,7 +33,7 @@
     var player = players[msg.playerID];
     if (!player) return;
 
-    player.sendEvent(msg.cmd, [msg.data]);
+    player.forward(msg.cmd, [msg.data]);
   }
 
   // Constructor
@@ -60,7 +60,7 @@
     }
   };
 
-  GameServer.prototype.addEventListener = function (type, callback) {
+  GameServer.prototype.on = function (type, callback) {
     if (!listeners.hasOwnProperty(type)) {
       listeners[type] = callback;
     }
@@ -78,23 +78,23 @@
     this.handlers = {};
   };
 
-  PlayerConnection.prototype.sendCommand = function(cmd, data) {
+  PlayerConnection.prototype.send = function(cmd, data) {
     net.emit('updatePlayer', {'cmd': cmd, 'playerID': this.id, 'data': data || {}});
   };
 
-  PlayerConnection.prototype.addEventListener = function(type, handler) {
+  PlayerConnection.prototype.on = function(type, handler) {
     this.handlers[type] = handler;
   };
 
-  PlayerConnection.prototype.removeEventListener = function(type) {
-    this.handlers[type] = undefined;
+  PlayerConnection.prototype.off = function(type) {
+    if (type === undefined) {
+      this.handlers = {};
+    } else {
+      this.handlers[type] = undefined;
+    }
   };
 
-  PlayerConnection.prototype.removeAllListeners = function() {
-    this.handlers = {};
-  };
-
-  PlayerConnection.prototype.sendEvent = function(type, args) {
+  PlayerConnection.prototype.forward = function(type, args) {
     var fn = this.handlers[type];
     if (fn) {
       fn.apply(this, args);
