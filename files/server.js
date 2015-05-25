@@ -27,7 +27,7 @@ function handleGame (game) {
 
   game.on('disconnect', function () {
     Object.keys(game.players).forEach(function (player) {
-      game.players[player].emit('disconnect');
+      game.players[player].disconnect();
     });
     used.push(gameID);
     delete games[gameID];
@@ -59,7 +59,7 @@ function handlePlayer (player) {
 
     var g = games[gameID];
     if (player.hasOwnProperty('gameID')) {
-      return player.emit('joined', { 'error': 'The player is already part of game ' + player.gameID });;
+      return player.emit('joined', { 'error': 'The player is already part of game ' + player.gameID });
     }
 
     player.gameID = gameID;
