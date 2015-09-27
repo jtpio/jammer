@@ -54,8 +54,10 @@ public/js/gameServer.js
 
 There is a global depedency on socket.io, so make sure to include it (see example).
 
+#### Game examples using jammer
 
-Another example with a bigger game, but using a previous version (different API): [TwinFusion](https://github.com/jtpio/twin-fusion)
+- [TwinFusion](https://github.com/jtpio/twin-fusion): made at a game jam, but using a previous version (different API).
+- [Squame](https://github.com/jtpio/squame): proof of concept for jammer.
 
 ### GameServer
 
