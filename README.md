@@ -6,12 +6,25 @@ It is written in Javascript so it focuses on **web based** games.
 
 It is designed for games with multiple players playing simultaneously on the same screen.
 
-## Install
-Install node.js, then:
+## Usage
+
+### Docker
+
+To run the server in a docker container, and mount your front-end files:
+
+	docker build -t $USER/jammer .
+	docker run -t --name=jammer -v /path/to/your/public/files:/app/public -p 4321:4321 $USER/jammer
+
+Doing so, you only have to provide the files doing the client side work, and let node serve them. This is the easiest way to get started. Even though the server will run in a docker container, it is still possible to modify it and rebuild an image, in case you have specific requirements.
+
+### Install and run manually
+
+It is also possible to run jammer manually by first installing node.js, and then:
 
     npm install jammer -g
 
-## Usage
+Followed by:
+
     jammer
 
 This will generate all the files you need in the current working directory and run *npm install* automatically:
