@@ -13,9 +13,11 @@ It is designed for games with multiple players playing simultaneously on the sam
 To run the server in a docker container, and mount your front-end files:
 
 	docker build -t $USER/jammer .
-	docker run -t --name=jammer -v /path/to/your/public/files:/app/public -p 4321:4321 $USER/jammer
+	docker run -t --name=jammer -v /path/to/your/public/files:/app/public:ro -p 4321:4321 $USER/jammer
 
 Doing so, you only have to provide the files doing the client side work, and let node serve them. This is the easiest way to get started. Even though the server will run in a docker container, it is still possible to modify it and rebuild an image, in case you have specific requirements.
+
+The files are served from the `/app/public` folder. So if you have two files named `game.html` and `player.html`, visit [localhost:4321/game.html](http://localhost:4321/game.html) to create a game instance and [localhost:4321/player.html](http://localhost:4321/player.html) to spawn up a player.
 
 ### Install and run manually
 
@@ -51,7 +53,7 @@ To generate the files at a specific path:
     jammer /path/to/destination/
 
 ## Documentation
-## Examples
+### Examples
 The generated files include an example showing the basics.
 
 ```
